@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Smart Mileage</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Smart Mileage</h1>
+        <p>TRIP &amp; FUEL TRACKER</p>
+      </div>
+      <span>🚘</span>
+    </header>
+    <nav>
+      <button data-mode="odo" class="active">Odometer</button>
+      <button data-mode="gps">Live GPS</button>
+      <button data-mode="manual">Manual</button>
+    </nav>
+    <section class="hero">
+      <small>TOTAL TRIP DISTANCE</small>
+      <strong id="distance">0.00 km</strong>
+      <small id="elapsed">Ready for your trip</small>
+    </section>
+    <section id="odo" class="grid">
+      <label>Starting odometer (km)<input id="start" type="number" min="0" placeholder="25000"></label>
+      <label>Ending odometer (km)<input id="end" type="number" min="0" placeholder="25350"></label>
+    </section>
+    <section id="gps" hidden>
+      <div class="actions">
+        <button id="go" class="green">▶ Start Trip</button>
+        <button id="stop" class="red" disabled>■ End Trip</button>
+      </div>
+      <p id="status" role="status">GPS not started</p>
+      <canvas id="route" width="600" height="200"></canvas>
+      <small>Route trace — keep the browser open and screen awake.</small>
+    </section>
+    <section id="manual" hidden>
+      <label>Total distance (km)<input id="manualkm" type="number" min="0" step="any" placeholder="Distance from Google Maps"></label>
+      <a href="https://maps.google.com/" target="_blank" rel="noopener">Open Google Maps</a>
+    </section>
+    <div class="grid">
+      <label>Amount paid for fuel (₹)<input id="paid" type="number" min="0" step="any" placeholder="₹ amount on your receipt"></label>
+      <label>Fuel price (₹/litre)<input id="price" type="number" min="0" step="any" value="106"></label>
+    </div>
+    <div class="grid metrics">
+      <article><small>Average mileage</small><strong id="mileage">—</strong><small>km/L</small></article>
+      <article><small>Total fuel cost</small><strong id="cost">—</strong></article>
+      <article><small>Cost per kilometre</small><strong id="perkm">—</strong></article>
+      <article><small>Fuel quantity</small><strong id="used">—</strong><small>calculated from amount paid ÷ price</small></article>
+    </div>
+    <div class="actions">
+      <button id="save" class="active">Save Trip</button>
+      <button id="reset">Reset</button>
+    </div>
+    <p id="msg" role="status"></p>
+    <h2>Trip history</h2>
+    <div id="history">Loading…</div>
+    <footer>Fuel quantity is calculated as amount paid ÷ fuel price. Mileage assumes that quantity was consumed during the trip. Fuel price is editable and 106 is an example. GPS requires permission and HTTPS or localhost.</footer>
+  </main>
+  <script src="{{ url_for('static',filename='app.js') }}"></script>
+</body>
+</html>
