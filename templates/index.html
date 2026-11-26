@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Smart Mileage</title>
   <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
   <main>
@@ -35,8 +36,9 @@
         <button id="stop" class="red" disabled>■ End Trip</button>
       </div>
       <p id="status" role="status">GPS not started</p>
-      <canvas id="route" width="600" height="200"></canvas>
-      <small>Route trace — keep the browser open and screen awake.</small>
+      <div id="route" role="region" aria-label="OpenStreetMap live route"></div>
+      <p id="mapNotice" role="status">OpenStreetMap is free to use and does not need an API key.</p>
+      <small>Keep the browser open and screen awake while tracking.</small>
     </section>
     <section id="manual" hidden>
       <label>Total distance (km)<input id="manualkm" type="number" min="0" step="any" placeholder="Distance from Google Maps"></label>
@@ -61,6 +63,7 @@
     <div id="history">Loading…</div>
     <footer>Fuel quantity is calculated as amount paid ÷ fuel price. Mileage assumes that quantity was consumed during the trip. Fuel price is editable and 106 is an example. GPS requires permission and HTTPS or localhost.</footer>
   </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="{{ url_for('static',filename='app.js') }}"></script>
 </body>
 </html>
