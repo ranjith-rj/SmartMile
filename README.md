@@ -11,3 +11,9 @@ SQLite trips.db is created automatically. Manual mode accepts a distance entered
 Enter the amount paid for fuel and the price per litre to calculate the purchased fuel quantity (amount paid divided by price). The mileage estimate assumes that quantity was consumed over the recorded trip.
 
 The Live GPS map uses OpenStreetMap through Leaflet and does not need an API key. OpenStreetMap map data is © OpenStreetMap contributors. Its public tile server has a usage policy and is not intended for high-volume production traffic.
+
+GPS trips filter inaccurate fixes, stationary drift, and unrealistic jumps. They show accuracy, speed, and duration; where supported, the browser screen wake lock is requested while tracking. End Trip stops GPS without clearing the route. Save Trip stores the GPS coordinates, duration, distance, fuel quantity, amount paid, and fuel price. Existing SQLite databases are migrated automatically.
+
+## Render deployment
+
+Use `pip install -r requirements.txt` as the build command and `gunicorn app:app --bind 0.0.0.0:$PORT` as the start command. Render HTTPS enables mobile browser GPS and screen-wake-lock support where available. To keep SQLite data across redeploys, attach a persistent disk mounted at `/var/data` and set `DATABASE_PATH=/var/data/trips.db`; without a persistent disk, the service filesystem may be reset.

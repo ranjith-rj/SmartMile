@@ -36,6 +36,10 @@
         <button id="stop" class="red" disabled>■ End Trip</button>
       </div>
       <p id="status" role="status">GPS not started</p>
+      <div class="grid gps-readouts">
+        <article><small>GPS accuracy</small><strong id="gpsAccuracy">—</strong></article>
+        <article><small>Current speed</small><strong id="gpsSpeed">—</strong></article>
+      </div>
       <div id="route" role="region" aria-label="OpenStreetMap live route"></div>
       <p id="mapNotice" role="status">OpenStreetMap is free to use and does not need an API key.</p>
       <small>Keep the browser open and screen awake while tracking.</small>
@@ -49,7 +53,7 @@
       <label>Fuel price (₹/litre)<input id="price" type="number" min="0" step="any" value="106"></label>
     </div>
     <div class="grid metrics">
-      <article><small>Average mileage</small><strong id="mileage">—</strong><small>km/L</small></article>
+      <article><small>Average mileage</small><strong id="mileage">—</strong><small>km/L · assumes all purchased fuel was consumed</small></article>
       <article><small>Total fuel cost</small><strong id="cost">—</strong></article>
       <article><small>Cost per kilometre</small><strong id="perkm">—</strong></article>
       <article><small>Fuel quantity</small><strong id="used">—</strong><small>calculated from amount paid ÷ price</small></article>
@@ -61,7 +65,7 @@
     <p id="msg" role="status"></p>
     <h2>Trip history</h2>
     <div id="history">Loading…</div>
-    <footer>Fuel quantity is calculated as amount paid ÷ fuel price. Mileage assumes that quantity was consumed during the trip. Fuel price is editable and 106 is an example. GPS requires permission and HTTPS or localhost.</footer>
+    <footer>Fuel quantity is calculated as amount paid ÷ fuel price. Mileage assumes all purchased fuel was consumed during the trip. Fuel price is editable and 106 is an example. GPS requires permission and HTTPS or localhost.</footer>
   </main>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="{{ url_for('static',filename='app.js') }}"></script>
